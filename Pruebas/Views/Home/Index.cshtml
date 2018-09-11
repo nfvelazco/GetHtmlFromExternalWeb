@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+
+    $(function () {
+
+        //var api = "https://www.bna.com.ar/Cotizador/MonedasHistorico";
+
+        //function hola(rta) { console.log(rta); }
+
+        return $.ajax({
+            type: 'GET',
+            url: '/Home/GetHtml',
+            //cache: false,
+            //dataType: "jsonp",
+            //jsonpCallback: hola,
+
+            timeout: 15000,
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error("TIMEOUT");
+                console.error(jqXHR.status + " - " + textStatus + " - " + errorThrown);
+                alert("Se ha alcanzado el tiempo máximo de espera. Por favor recargue la página o contacte a los administadores");
+            }
+        }).done(function (rta) {
+            $("#prueba").html(rta)
+        });
+
+    });
+
+
+</script>
+
+<div id="prueba"></div>
